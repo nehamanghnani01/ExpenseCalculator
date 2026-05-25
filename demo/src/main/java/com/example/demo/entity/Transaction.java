@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -23,7 +24,7 @@ public class Transaction {
     private Long id;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private Double amount;
+    private BigDecimal amount;
 
     private String description;
 
@@ -41,11 +42,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
