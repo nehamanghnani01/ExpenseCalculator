@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CreateCategoryRequest;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
+    public Category createCategory(@Valid @RequestBody CreateCategoryRequest category) {
         return categoryService.createCategory(category);
     }
 

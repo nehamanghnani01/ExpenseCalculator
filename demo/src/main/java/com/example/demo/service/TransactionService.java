@@ -1,22 +1,45 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.CreateTransactionRequest;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Transaction;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.TransactionRepository;
 
 @Service
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final CategoryRepository categoryRepository;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
         this.transactionRepository = transactionRepository;
+        this.categoryRepository = categoryRepository;
     }
 
-    public void createTransaction(Transaction transaction) {
+    public void createTransaction(CreateTransactionRequest request) {
+        Transaction transaction = new Transaction();
+        transaction.setAmount(request.getAmount());
+        transaction.setDescription(request.getDescription());
+
+        LocalDate today = LocalDate.now();
+        transaction.setDate(today);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        transaction.setCreatedAt(now);
+        transaction.setUpdatedAt(now);
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow();
+
+        transaction.setCategory(category);
         transactionRepository.save(transaction);
     }
 
