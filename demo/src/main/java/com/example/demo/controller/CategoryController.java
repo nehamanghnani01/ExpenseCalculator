@@ -34,4 +34,9 @@ public class CategoryController {
     public void deleteCategory(@PathVariable Integer id) {
         categoryService.deleteCategory(id);
     }
+
+    @PatchMapping("/{id}")
+    public Category updateCategory(@PathVariable Integer id, @Valid @RequestBody CreateCategoryRequest category) {
+        return categoryService.updateCategory(id, category);
+    }
 }

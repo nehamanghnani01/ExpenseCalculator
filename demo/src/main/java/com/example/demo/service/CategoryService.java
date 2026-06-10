@@ -42,4 +42,18 @@ public class CategoryService {
     public void deleteCategory(Integer id) {
         categoryRepository.deleteById(id);
     }
+
+    public Category updateCategory(Integer id, CreateCategoryRequest categoryRequest) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow();
+
+        category.setName(categoryRequest.getName());
+        TransactionType type = TransactionType.valueOf(categoryRequest.getType().toUpperCase());
+        category.setType(type);
+
+        LocalDateTime now = LocalDateTime.now();
+        category.setUpdatedAt(now);
+
+        return categoryRepository.save(category);
+    }
 }

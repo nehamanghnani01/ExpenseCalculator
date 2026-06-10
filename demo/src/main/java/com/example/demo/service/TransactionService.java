@@ -51,4 +51,21 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
+    public void updateTransaction(Integer id, CreateTransactionRequest request) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow();
+
+        transaction.setAmount(request.getAmount());
+        transaction.setDescription(request.getDescription());
+
+        LocalDateTime now = LocalDateTime.now();
+        transaction.setUpdatedAt(now);
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow();
+
+        transaction.setCategory(category);
+        transactionRepository.save(transaction);
+    }
+
 }
