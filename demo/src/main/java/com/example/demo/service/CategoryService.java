@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.CreateCategoryRequest;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.TransactionType;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.CategoryRepository;
 
 @Service
@@ -45,7 +46,7 @@ public class CategoryService {
 
     public Category updateCategory(Integer id, CreateCategoryRequest categoryRequest) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
 
         category.setName(categoryRequest.getName());
         TransactionType type = TransactionType.valueOf(categoryRequest.getType().toUpperCase());

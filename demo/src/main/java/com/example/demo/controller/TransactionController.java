@@ -15,6 +15,8 @@ import com.example.demo.dto.CreateTransactionRequest;
 import com.example.demo.entity.Transaction;
 import com.example.demo.service.TransactionService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -31,7 +33,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public void createTransaction(@RequestBody CreateTransactionRequest transaction) {
+    public void createTransaction(@Valid @RequestBody CreateTransactionRequest transaction) {
         transactionService.createTransaction(transaction);
     }
 

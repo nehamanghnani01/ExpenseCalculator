@@ -2,10 +2,15 @@ package com.example.demo.dto;
 
 import java.math.BigDecimal;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class CreateTransactionRequest {
 
+    @Positive
     private BigDecimal amount;
 
+    @NotBlank
     private String description;
 
     private Integer categoryId;
