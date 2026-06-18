@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
 
 @Entity
 @Table(name = "transactions")
@@ -26,6 +27,7 @@ public class Transaction {
     private Long id;
 
     @Column(nullable = false, precision = 10, scale = 2)
+    @DecimalMax(value = "50000.00", message = "Amount must be less than or equal to 50,000.00")
     private BigDecimal amount;
 
     private String description;

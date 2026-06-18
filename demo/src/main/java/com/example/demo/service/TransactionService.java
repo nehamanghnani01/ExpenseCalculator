@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.CreateTransactionRequest;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Transaction;
+import com.example.demo.exception.InvalidAmountException;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.TransactionRepository;
 
@@ -25,6 +27,9 @@ public class TransactionService {
 
     public void createTransaction(CreateTransactionRequest request) {
         Transaction transaction = new Transaction();
+        if (request.getAmount().compareTo(new BigDecimal("50000.00")) > 0) {
+            throw new InvalidAmountException("Amount must be less than 50000");
+        }
         transaction.setAmount(request.getAmount());
         transaction.setDescription(request.getDescription());
 
