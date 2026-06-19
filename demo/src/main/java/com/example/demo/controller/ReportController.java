@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.SummaryResponse;
@@ -19,7 +20,11 @@ public class ReportController {
 
     @GetMapping("/summary")
     public SummaryResponse getSummaryReport() {
-        // Placeholder for summary report logic
         return reportsService.generateSummaryReport();
+    }
+
+    @GetMapping("/summary/monthly")
+    public SummaryResponse getMonthlySummaryReport(@RequestParam int month, @RequestParam int year) {
+        return reportsService.generateMonthlySummaryReport(month, year);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +20,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
                 .toList();
     }
 
-    List<Transaction> findByDateBetween(LocalDateTime start, LocalDateTime end);
+    List<Transaction> findByDateBetween(LocalDate start, LocalDate end);
 
     List<Transaction> findByDescriptionContaining(String keyword);
 

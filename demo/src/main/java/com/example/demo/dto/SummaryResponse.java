@@ -2,16 +2,13 @@ package com.example.demo.dto;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.Positive;
-
 public class SummaryResponse {
 
-    @Positive
-    BigDecimal totalIncome;
+    private BigDecimal totalIncome;
 
-    BigDecimal totalExpense;
+    private BigDecimal totalExpense;
 
-    BigDecimal netBalance;
+    private BigDecimal netBalance;
 
     public BigDecimal getTotalIncome() {
         return totalIncome;
