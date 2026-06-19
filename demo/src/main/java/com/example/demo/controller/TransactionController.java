@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CreateTransactionRequest;
@@ -46,4 +48,21 @@ public class TransactionController {
     public void updateTransaction(@PathVariable Integer id, @RequestBody CreateTransactionRequest transaction) {
         transactionService.updateTransaction(id, transaction);
     }
+
+    @GetMapping("/description")
+    public List<Transaction> getTransactionsByDescription(@RequestParam String keyword) {
+        return transactionService.getTransactionsByDescription(keyword);
+    }
+
+    @GetMapping("/amount")
+    public List<Transaction> getTransactionsByAmountRange(@RequestParam(required = false) BigDecimal min,
+            @RequestParam(required = false) BigDecimal max) {
+        return transactionService.getTransactionsByAmountRange(min, max);
+    }
+
+    @GetMapping("/category")
+    public List<Transaction> getTransactionsByCategoryName(@RequestParam String name) {
+        return transactionService.getTransactionsByCategoryName(name);
+    }
+
 }

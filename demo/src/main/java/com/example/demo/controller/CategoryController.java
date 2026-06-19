@@ -39,4 +39,15 @@ public class CategoryController {
     public Category updateCategory(@PathVariable Integer id, @Valid @RequestBody CreateCategoryRequest category) {
         return categoryService.updateCategory(id, category);
     }
+
+    @GetMapping("/name")
+    public Category getCategoryByName(@RequestParam String name) {
+        return categoryService.getCategoryByName(name);
+    }
+
+    @GetMapping("/type")
+    public List<Category> getCategoriesByType(@RequestParam String type) {
+        return categoryService.getCategoriesByType(type);
+    }
+
 }

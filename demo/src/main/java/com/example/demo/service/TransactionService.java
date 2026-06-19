@@ -73,4 +73,26 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
+    public List<Transaction> getTransactionsByDescription(String keyword) {
+        return transactionRepository.findByDescriptionContaining(keyword);
+    }
+
+    public List<Transaction> getTransactionsByAmountRange(BigDecimal min, BigDecimal max) {
+        if (min != null && max != null) {
+            List<Transaction> transactions = transactionRepository.findByAmountGreaterThanEqual(min);
+            transactions.retainAll(transactionRepository.findByAmountLessThanEqual(max));
+            return transactions;
+        } else if (min != null) {
+            return transactionRepository.findByAmountGreaterThanEqual(min);
+        } else if (max != null) {
+            return transactionRepository.findByAmountLessThanEqual(max);
+        } else {
+            return transactionRepository.findAll();
+        }
+    }
+
+    public List<Transaction> getTransactionsByCategoryName(String name) {
+        return transactionRepository.findByCategoryName(name);
+    }
+
 }
