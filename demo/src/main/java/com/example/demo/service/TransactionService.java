@@ -91,8 +91,4 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> getTransactionsByCategoryName(String name) {
-        return transactionRepository.findByCategoryName(name);
-    }
-
 }

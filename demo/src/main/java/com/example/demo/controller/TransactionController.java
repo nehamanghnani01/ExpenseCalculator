@@ -60,9 +60,10 @@ public class TransactionController {
         return transactionService.getTransactionsByAmountRange(min, max);
     }
 
-    @GetMapping("/category")
-    public List<Transaction> getTransactionsByCategoryName(@RequestParam String name) {
-        return transactionService.getTransactionsByCategoryName(name);
-    }
+    // @GetMapping("/category")
+    // public List<Transaction> getTransactionsByCategoryName(@RequestParam String
+    // name) {
+    // return transactionService.getTransactionsByCategoryName(name);
+    // }
 
 }
