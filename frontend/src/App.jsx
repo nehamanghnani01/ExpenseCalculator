@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "./api/api";
+import TransactionTable from "./components/TransactionTable";
 
 function App() {
 
@@ -15,11 +16,7 @@ function App() {
     <div>
       <h1>Finance Tracker</h1>
 
-      {transactions.map(t => (
-        <div key={t.id}>
-          {t.description} - ${t.amount}
-        </div>
-      ))}
+      <TransactionTable transactions={transactions} />
     </div>
   );
 }
